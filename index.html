@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DigiBshelf - Cute Bookshelf App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" aria-live="polite">
+    <link rel="stylesheet" href="style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>DigiBshelf</h1>
+        <nav>
+            <ul>
+                <li><a href="#bookshelf">My Bookshelf</a></li>
+                <li><a href="#reading-list">Reading List</a></li>
+                <li><a href="#browse">Browse Books</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero">
+            <h2>Welcome to DigiBshelf</h2>
+            <p>Your cute digital bookshelf for all your favorite books!</p>
+            <a href="#bookshelf-preview" class="cta-btn">Get Started</a>
+        </section>
+
+        <div id="bookshelf-controls" style="margin-bottom:1rem;">
+            <label>Sort by:
+                <select id="bookshelf-sort">
+                    <option value="title">Title</option>
+                    <option value="author">Author</option>
+                    <option value="year">Year</option>
+                </select>
+            </label>
+            <label style="margin-left:1rem;">
+                <input type="checkbox" id="bookshelf-filter-read"> Show only Read
+            </label>
+        </div>
+
+        <!-- Bookshelf Section -->
+        <section id="bookshelf">
+            <!-- Bookshelf Preview on Home Page -->
+            <section id="bookshelf-preview">
+                <h2>My Bookshelf (Preview)</h2>
+                <div class="bookshelf">
+                    <!-- Show only a few books here -->
+                    <!-- <div class="shelf-row">
+                        <div class="book"><img src="cover1.jpg" alt="Book 1"></div>
+                        <div class="book"><img src="cover2.jpg" alt="Book 2"></div>
+                        <div class="book"><img src="cover3.jpg" alt="Book 3"></div>
+                    </div>
+                    <div class="shelf-row">
+                        <div class="book"><img src="cover4.jpg" alt="Book 4"></div>
+                        <div class="book"><img src="cover5.jpg" alt="Book 5"></div>
+                    </div> -->
+                </div>
+                <a href="#bookshelf-full" class="view-all-btn">View All Bookshelf</a>
+            </section>
+
+            <!-- Full Bookshelf Page/Section -->
+            <section id="bookshelf-full" style="display:none;">
+                <h2>My Full Bookshelf</h2>
+                <div class="bookshelf">
+                    <!-- Dynamically populated with all user's books using Google Books API -->
+                </div>
+                <a href="#bookshelf-preview" class="back-btn">Back to Home</a>
+            </section>
+        </section>
+
+        <!-- Book Details Modal -->
+        <div id="book-modal" class="modal" style="display:none;" role="dialog" aria-modal="true">
+            <div class="modal-content">
+                <span class="close-btn" id="close-modal">&times;</span>
+                <div id="modal-book-cover"></div>
+                <h3 id="modal-book-title"></h3>
+                <p id="modal-book-authors"></p>
+                <p id="modal-book-date"></p>
+                <p id="modal-book-genre"></p>
+                <p id="modal-book-rating"></p>
+                <p id="modal-book-summary"></p>
+
+                <div id="modal-rating-section" style="margin:0.7rem 0;">
+                    <label for="modal-rating-stars">Your Rating:</label>
+                    <span id="modal-rating-stars"></span>
+                </div>
+                <div id="modal-reviews-section" style="margin-top:1rem;">
+                    <h4>Reviews</h4>
+                    <form id="modal-review-form">
+                        <textarea id="modal-review-text" rows="2" placeholder="Write your review..." style="width:90%;margin-bottom:0.5rem;"></textarea>
+                        <button type="submit">Add Review</button>
+                    </form>
+                    <div id="modal-reviews-list"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reading List Section -->
+        <section id="reading-list">
+            <h2>Reading List</h2>
+            <div class="reading-list-columns">
+                <div>
+                    <h3>Not Yet Read</h3>
+                    <ul class="reading-list not-read"></ul>
+                </div>
+                <div>
+                    <h3>Read</h3>
+                    <ul class="reading-list read"></ul>
+                </div>
+            </div>
+            <form id="add-to-reading-list">
+                <input type="text" id="book-title" placeholder="Book Title" required>
+                <input type="text" id="book-author" placeholder="Author(s)" required>
+                <button type="submit">Add to Reading List</button>
+            </form>
+        </section>
+
+        <!-- Book Review Section -->
+        <section id="reviews">
+            <h2>Reviews</h2>
+            <div class="review-list">
+                <!-- User reviews for books -->
+            </div>
+        </section>
+
+        <!-- Browse Books Section -->
+        <section id="browse">
+            <h2>Browse New Books</h2>
+            <form id="genre-search">
+                <label for="genre">Choose a genre:</label>
+                <select id="genre" name="genre">
+                    <option value="fiction">Fiction</option>
+                    <option value="fantasy">Fantasy</option>
+                    <option value="romance">Romance</option>
+                    <option value="science">Science</option>
+                    <!-- Add more genres as needed -->
+                </select>
+                <button type="submit">Browse</button>
+            </form>
+            <form id="search-form" style="margin-bottom:1rem;">
+                <input type="text" id="search-query" placeholder="Search by title or author..." style="padding:0.5rem; border-radius:6px; border:1px solid #ccc; width:200px;">
+                <button type="submit">Search</button>
+            </form>
+            <div class="book-results">
+                <!-- Display books from Google Books API based on genre/likes -->
+            </div>
+        </section>
+
+        <!-- Likes System Section -->
+        <section id="likes">
+            <h2>Liked Books</h2>
+            <div class="liked-books">
+                <!-- Display books the user has liked -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Made by a book lover for book lovers</p>
+    </footer>
+    <script src="api.js"></script>
+    <div id="toast" class="toast" style="display:none;"></div>
+</body>
+</html>
